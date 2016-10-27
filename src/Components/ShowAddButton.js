@@ -5,15 +5,15 @@ class ShowAddButton extends Component {
 		var classString, buttonText;
 
 		if(this.props.displayed){
-			classString = 'btn btn-default btn-block';
+			classString = 'btn btn-default btn-block add-item-btn';
 			buttonText = 'Cancel';
 		}
 		else{
-			classString = 'btn btn-success btn-block';
+			classString = 'btn btn-success btn-block add-item-btn';
 			buttonText = 'Create New Item';
 		}
 		return (
-			<button className={classString} onClick={this.props.onToggleForm}>{buttonText}</button>
+			<button className={classString } onClick={this.props.onToggleForm}>{buttonText}</button>
 		);
 	}
 }

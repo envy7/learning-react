@@ -31,11 +31,10 @@ class Feed extends Component {
 	render() {
 		return (
 			<div>
-				<div className="container">
-					<ShowAddButton onToggleForm={this.onToggleForm} displayed={this.state.formDisplayed} />
-				</div>
-
-				<FeedForm />
+				
+				<ShowAddButton onToggleForm={this.onToggleForm} displayed={this.state.formDisplayed} />
+				
+				<FeedForm displayed={this.state.formDisplayed} />
 				<br/>
 				<br/>
 
