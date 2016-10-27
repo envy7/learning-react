@@ -81,8 +81,15 @@ table {
 	background-color: #f50057 !important;
 }
 
-.add-confirm {
-	width: 100% !important;
+.feed-container {
+	position: relative;
+}
+
+.add-new-news {
+	position: fixed !important;
+	bottom: 25px;
+	right: 25px;
+	background-color: #f50057 !important;	
 }
 
 .form-control.description {
@@ -114,3 +121,13 @@ table {
 	width: 80% !important;
 	margin: 10px auto !important;
 }
+
+/* label focus color */
+ .input-field input:focus + label {
+   color: red !important;
+ }
+ /* label underline focus color */
+ .row .input-field input:focus {
+   border-bottom: 1px solid red !important;
+   box-shadow: 0 1px 0 0 red !important
+ }

@@ -3,7 +3,7 @@ import ShowAddButton from './ShowAddButton';
 import FeedForm from './FeedForm';
 import FeedList from './FeedList';
 
-var feedItems = [
+var feedNews = [
 	{key: '1', title: 'Realtime Data', description: 'Firebase is cool', votecount: 49 },
 	{key: '2', title: 'Noel', description: 'Firebase is awesome', votecount: 50 },
 	{key: '3', title: 'Joel', description: 'Firebase is high', votecount: 51 }
@@ -13,32 +13,47 @@ class Feed extends Component {
 
 	constructor(props){
 		super(props);
-		this.data = feedItems;
 		this.state = {
-			items : feedItems,
+			news : feedNews,
 			formDisplayed : false
 		};
 		this.onToggleForm = this.onToggleForm.bind(this);
+		this.onNewNews = this.onNewNews.bind(this);
 	}
 
 	onToggleForm() {
-		console.log("Noel");
+		console.log("Toggled");
 		this.setState({
 			formDisplayed: !this.state.formDisplayed
 		})
 	}
 
+	onNewNews(newItem) {
+		var newNews = this.state.news.concat([newItem]);
+		this.setState({
+			news : newNews,
+			formDisplayed : false
+		});
+	}
+
 	render() {
+
+		var display = this.state.formDisplayed ? 'none' : 'block';
+		var styles = {
+			display: display
+		}
+
 		return (
-			<div>
+			<div className="feed-container">
 				
 				<ShowAddButton onToggleForm={this.onToggleForm} displayed={this.state.formDisplayed} />
 				
-				<FeedForm displayed={this.state.formDisplayed} />
+				<FeedForm displayed={this.state.formDisplayed} onNewNews={this.onNewNews} onToggleForm={this.onToggleForm}/>
 				<br/>
 				<br/>
 
-				<FeedList items={this.state.items}/>
+				<FeedList items={this.state.news}/>
+				<a style={styles} className="btn-floating btn-large waves-effect add-new-news" onClick={this.onToggleForm} ><i className="material-icons">edit</i></a>
 			</div>
 		);
 	}

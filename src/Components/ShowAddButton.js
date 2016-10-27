@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 
 class ShowAddButton extends Component {
 	render() {
-		var classString, buttonText;
 
-		if(this.props.displayed){
-			classString = 'btn btn-default btn-block add-item-btn';
-			buttonText = 'Cancel';
+		var display = this.props.displayed ? 'block' : 'none';
+		var styles = {
+			display: display
 		}
-		else{
-			classString = 'btn btn-success btn-block add-item-btn';
-			buttonText = 'Create New Item';
-		}
+
 		return (
-			<button className={classString } onClick={this.props.onToggleForm}>{buttonText}</button>
+			<button style={styles} className='btn btn-default btn-block add-item-btn' onClick={this.props.onToggleForm}>Cancel</button>
 		);
 	}
 }
