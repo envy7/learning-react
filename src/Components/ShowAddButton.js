@@ -9,7 +9,7 @@ class ShowAddButton extends Component {
 		}
 
 		return (
-			<button style={styles} className='btn btn-default btn-block add-item-btn' onClick={this.props.onToggleForm}>Cancel</button>
+			<button style={styles} className='btn btn-default btn-block add-item-btn waves-effect' onClick={this.props.onToggleForm}>Cancel</button>
 		);
 	}
 }

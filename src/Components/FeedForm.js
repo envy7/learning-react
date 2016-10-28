@@ -6,7 +6,7 @@ class FeedForm extends Component {
 	handleForm(e) {
 		e.preventDefault();
 
-		alert(this.title.value);
+		//alert(this.title.value);
 		
 		var newNews = {
 			title : this.title.value,
@@ -15,8 +15,8 @@ class FeedForm extends Component {
 		};
 
 		console.log(newNews);
-
- 		//React.findDOMNode(this.refs.feedForm).reset();
+		//reset form data
+		this.feedForm.reset();
 
 		this.props.onNewNews(newNews);
 	}
@@ -29,10 +29,20 @@ class FeedForm extends Component {
 		}
 
 		return (
-			<form ref="feedForm" style={styles} id="feedForm" onSubmit={this.handleForm.bind(this)}>
+			<form ref={(input) => this.feedForm = input} style={styles} id="feedForm" onSubmit={this.handleForm.bind(this)}>
 				<div className="form-grp">
-					<input ref={(input) => this.title = input} type="text" className="form-control" placeholder="title"/>
-					<textarea ref={(input) => this.desc = input} type="text" className="form-control description materialize-textarea" placeholder="description"></textarea>
+					<div className="row">
+						<div className="input-field col s12">
+							<input ref={(input) => this.title = input} type="text" className="form-control" id="title"/>
+							<label htmlFor="title">Title</label>
+						</div>
+					</div>
+					<div className="row">
+					<div className="input-field col s12">
+						<textarea ref={(input) => this.desc = input} type="text" className="form-control description materialize-textarea" id="desc"></textarea>
+						<label htmlFor="desc">Description</label>
+					</div>
+					</div>
 				</div>
 				<button onClick={this.props.onToggleForm} type="submit" className="btn-floating btn-large waves-effect add-news"><i className="material-icons">add</i></button>
 			</form>
