@@ -43,11 +43,10 @@ class Feed extends Component {
 			items.sort(function(curr, next){
 				return next.votecount-curr.votecount;
 			});
-			console.log(items);
+			//console.log(items);
 			this.setState({
 				news : items
 			})
-			console.log(items);
 		}.bind(this))
 	}
 
@@ -77,6 +76,12 @@ class Feed extends Component {
 		var styles = {
 			display: display
 		}
+		
+		var displayGif = this.state.news.length ? 'none' : 'block';
+		var styleGif = {
+			display : displayGif
+		}
+
 
 		return (
 			<div className="feed-container">
@@ -86,7 +91,7 @@ class Feed extends Component {
 				<FeedForm displayed={this.state.formDisplayed} onNewNews={this.onNewNews} onToggleForm={this.onToggleForm}/>
 				<br/>
 				<br/>
-
+				<img className="loader-gif" style={styleGif} src="http://www.citysearchlocal.com/images/g-dots2.gif" alt="loader-gif"/>
 				<FeedList items={this.state.news} onVote={this.onVote}/>
 				<a style={styles} className="btn-floating btn-large waves-effect add-new-news" onClick={this.onToggleForm} ><i className="material-icons">edit</i></a>
 			</div>
