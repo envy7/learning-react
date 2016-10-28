@@ -106,11 +106,23 @@ table {
 	padding: 15px;
 }
 
-.votecount{
+.votecount-pv, .votecount-nv{
 	padding: 10px;
 	border-radius: 50%;
-	background-color: #8bc34a;
 	color: #fff;
+}
+
+.votecount-pv{
+	background-color: #8bc34a;
+}
+
+.votecount-nv{
+	background-color: #e53935;
+}
+
+.extra-pad {
+	padding-left:14px;
+	padding-right:14px;
 }
 
 .waves-indigo {

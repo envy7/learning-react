@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "firebase": "^3.5.2",
     "react-scripts": "0.7.0"
   },
   "dependencies": {

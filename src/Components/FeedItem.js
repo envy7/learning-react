@@ -30,6 +30,26 @@ class FeedItem extends Component {
 	}
 
 	render() {
+
+		var classText;
+		if(this.props.votecount < 0){
+			if(this.props.votecount > -10){
+				classText = "votecount-nv z-depth-1 extra-pad";
+			}
+			else{
+				classText = "votecount-nv z-depth-1";
+			}
+		}
+		else{
+			if(this.props.votecount < 10){
+				classText = "votecount-pv z-depth-1 extra-pad";
+			}
+			else{
+				classText = "votecount-pv z-depth-1";
+			}
+			
+		}
+
 		return (
 			<li key={this.props.id} className="list-grp row  card-panel ">
 				<div className="col l11 m10 s8">
@@ -38,7 +58,7 @@ class FeedItem extends Component {
 				</div>
 				<div className="col l1 m2 s4">
 					<a className="row right-end"><i onClick={this.onUpVote} className="material-icons waves-effect waves-indigo">expand_less</i></a>
-					<div className="row right-end"><span className="votecount z-depth-1">{this.props.votecount}</span></div>
+					<div className="row right-end"><span className={classText}>{this.props.votecount}</span></div>
 					<a className="row right-end"><i onClick={this.onDownVote} className="material-icons waves-effect waves-indigo">expand_more</i></a>
 				</div>
 			</li>

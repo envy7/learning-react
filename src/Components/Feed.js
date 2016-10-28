@@ -3,53 +3,72 @@ import ShowAddButton from './ShowAddButton';
 import FeedForm from './FeedForm';
 import FeedList from './FeedList';
 
-var feedNews = [
-	{key: 1, title: 'Realtime Data', description: 'Firebase is cool', votecount: 49 },
-	{key: 2, title: 'Noel', description: 'Firebase is awesome', votecount: 50 },
-	{key: 3, title: 'Joel', description: 'Firebase is high', votecount: 51 }
-];
+
+var firebase = require("firebase");
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+var config = {
+  apiKey: "AIzaSyBiE5BPGaeIQUo9bAnBKxU8jhXVvqU6p2M",
+  authDomain: "react-news-app.firebaseapp.com",
+  databaseURL: "https://react-news-app.firebaseio.com",
+  storageBucket: "gs://react-news-app.appspot.com",
+};
+firebase.initializeApp(config);
+
+var db = firebase.database().ref('news/');
 
 class Feed extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
-			news : feedNews,
+			news : [],
 			formDisplayed : false
 		};
 		this.onToggleForm = this.onToggleForm.bind(this);
 		this.onNewNews = this.onNewNews.bind(this);
 		this.onVote = this.onVote.bind(this);
+		this.loadData = this.loadData.bind(this);
+	}
+
+	loadData(){
+		db.on('value', function(snap){
+			var items = [];
+			snap.forEach(function(itemSnap){
+				var item = itemSnap.val();
+				item.key = itemSnap.key;
+				items.push(item);
+			})
+			//sort the array of objects according to votecount
+			items.sort(function(curr, next){
+				return next.votecount-curr.votecount;
+			});
+			console.log(items);
+			this.setState({
+				news : items
+			})
+			console.log(items);
+		}.bind(this))
+	}
+
+	componentDidMount(){
+		this.loadData();
 	}
 
 	onToggleForm() {
 		console.log("Toggled");
 		this.setState({
-			formDisplayed: !this.state.formDisplayed
+			formDisplayed: !this.state.formDisplayed 
 		})
 	}
 
 	onNewNews(newItem) {
-		newItem.key = this.state.news.length + 1;
-		var newNews = this.state.news.concat([newItem]);
-		this.setState({
-			news : newNews, 
-			formDisplayed : false
-		});
-
-		console.log(newNews);
+		db.push(newItem);
 	}
 
 	onVote(item) { 
-		var updatedNews = this.state.news;
-		for(var news in updatedNews){
-			if(updatedNews[news].key === item.key){
-				updatedNews[news] = item;
-			}
-		}
-		this.setState({
-			news: updatedNews
-		})
+		var dbnews = db.child(item.key);
+		dbnews.update(item);
 	}
 
 	render() {
