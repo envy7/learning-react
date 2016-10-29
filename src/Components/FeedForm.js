@@ -7,18 +7,22 @@ class FeedForm extends Component {
 		e.preventDefault();
 
 		//alert(this.title.value);
-		
-		var newNews = {
-			title : this.title.value,
-			description : this.desc.value,
-			votecount : 0
-		};
+		if(this.title.value === '' || this.desc.value ===''){
+			alert("All fields not filled");
+		}
+		else{
+			var newNews = {
+				title : this.title.value,
+				description : this.desc.value,
+				votecount : 0
+			};
 
-		console.log(newNews);
-		//reset form data
-		this.feedForm.reset();
+			console.log(newNews);
+			//reset form data
+			this.feedForm.reset();
 
-		this.props.onNewNews(newNews);
+			this.props.onNewNews(newNews);
+		}
 	}
 
 	render() {
